@@ -5,6 +5,8 @@ import sys, re, subprocess
 #if len(sys.argv) != 2:
 #    print "Usage: arping2tex <net>\n  eg: arping2tex 192.168.1.0/24"
 #    sys.exit(1)
+path_to_mdb = "/home/pronto/git/random-scripts/arp/"
+num_box = 0
 p = subprocess.Popen(["route"], stdout=subprocess.PIPE)
 output1 = p.stdout.read().split('\n')
 output2 = output1[2].split(' ')
@@ -37,15 +39,15 @@ for snd,rcv in ans:
 	#print "test:" + Ether.src + "\n"
 	mac = rcv.sprintf(r"%Ether.src%")
 	ip = rcv.sprintf(r"%ARP.psrc%")
-	for line in open("/root/python/mdb"):
+	for line in open(path_to_mdb+"mdb"):
 		if mac[:8].upper() in line:
 			info1 = re.sub("\n", "", line)
 			info = re.sub(mac[:8].upper(), "" ,info1)
 	#		print mac + " | " +  " | " + info + " | "
 	#	else:
 	#		info = "NOT FOUND IN DATABSE"
-
+	num_box += 1
 	print ip + " \t " + mac + " \t " + info  
 	#print mac[:8]  #woo, THIS FUCKING WORKS , BITCH >:O
 	#print rcv.sprintf(r"%Ether.src% & %ARP.psrc%\\")
-
+print "total boxes: " + str(num_box)
