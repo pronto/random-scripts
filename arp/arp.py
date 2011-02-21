@@ -15,7 +15,7 @@ for snd,rcv in ans:
 	#print "test:" + Ether.src + "\n"
 	mac = rcv.sprintf(r"%Ether.src%")
 	ip = rcv.sprintf(r"%ARP.psrc%")
-	for line in open("/root/python/mdb"):
+	for line in open("/home/pronto/git/random-scripts/arp/mdb"):
 		if mac[:8].upper() in line:
 			info1 = re.sub("\n", "", line)
 			info = re.sub(mac[:8].upper(), "" ,info1)
