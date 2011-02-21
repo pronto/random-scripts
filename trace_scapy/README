@@ -1,0 +1,55 @@
+req: scapy, python 2.x (tested on 2.7) 
+		rsvg( to convert svg to png, you can remove that)
+		scp ( i have it set up to autoupload to my server
+
+this script will:
+	take a list of servers from a file and run it though a scapy traceroute
+
+	it can also ignore the file, and you can manully enter in servers
+
+	right now which ports are hardcoded in
+
+output example:
+ sudo python2.7 trace.py 
+WARNING: No route found for IPv6 destination :: (no default route?)
+enter in name for image: baidu
+use file for server list? yes/no: no
+enter in domain/ip: baidu.com
+['baidu.com']
+Begin emission:
+*************************Finished to send 40 packets.
+***********Begin emission:
+Finished to send 4 packets.
+*Begin emission:
+Finished to send 3 packets.
+*Begin emission:
+Finished to send 2 packets.
+Begin emission:
+Finished to send 2 packets.
+
+Received 38 packets, got 38 answers, remaining 2 packets
+   220.181.111.85:tcp443 220.181.111.85:tcp80 
+1  192.168.2.1     11    192.168.2.1     11   
+2  192.168.1.1     11    192.168.1.1     11   
+3  98.117.207.1    11    98.117.207.1    11   
+4  130.81.110.162  11    130.81.110.162  11   
+6  130.81.19.76    11    130.81.19.76    11   
+7  152.63.2.253    11    152.63.2.253    11   
+8  152.63.41.233   11    152.63.41.233   11   
+9  204.255.169.218 11    204.255.169.218 11   
+10 144.232.19.229  11    144.232.19.229  11   
+11 144.232.20.15   11    144.232.20.15   11   
+12 144.232.20.186  11    144.232.20.186  11   
+13 144.232.9.58    11    144.232.9.58    11   
+14 144.223.242.126 11    144.223.242.126 11   
+15 202.97.50.53    11    202.97.50.53    11   
+16 202.97.51.69    11    202.97.51.69    11   
+17 202.97.53.229   11    202.97.53.229   11   
+18 202.97.53.161   11    202.97.53.161   11   
+19 220.181.16.149  11    220.181.16.149  11   
+20 220.181.16.10   11    220.181.16.10   11   
+made
+chowned
+convreted
+http://pronto185.com/linux/scapy/baidu.png
+
