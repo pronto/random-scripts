@@ -63,7 +63,7 @@ for snd,rcv in ans:
 	#	else:
 	#		info = "NOT FOUND IN DATABSE"
 	num_box += 1
-	print ip + " \t " + mac + " \t " + info  
+	print ip + " \t " + mac + " \t " + info.split(" ")[0]  
 	#print mac[:8]  #woo, THIS FUCKING WORKS , BITCH >:O
 	#print rcv.sprintf(r"%Ether.src% & %ARP.psrc%\\")
 print "total boxes: " + str(num_box)
