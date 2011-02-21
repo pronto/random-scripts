@@ -1,5 +1,5 @@
 Needs scapy, tcpdump .. amoung other things 
-
+these scripts also work on the nokia n900 (need to install tcpdump and scapy on the n900 though)
 yeah..
 
 The auto one gets the network you're on from route
