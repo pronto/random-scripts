@@ -1,3 +1,17 @@
 Needs scapy, tcpdump .. amoung other things 
 
 yeah..
+
+The auto one gets the network you're on from route
+
+the non-auto arp.py needs your network like 192.168.2.0/24
+
+output example:
+[root@amd arp]# python2.7 arp.auto.py 
+192.168.2.0/24
+WARNING: No route found for IPv6 destination :: (no default route?)
+192.168.2.1      00:0c:41:xx:xx:xx              Cisco-Li               # Cisco-Linksys
+192.168.2.179    00:17:31:xx:xx:xx              AsustekC               # ASUSTek COMPUTER INC.
+192.168.2.109    1c:4b:d6:xx:xx:xx              Azurewav               # AzureWave
+192.168.2.115    ec:9b:5b:xx:xx:xx              Nokia                  # Nokia Corporation
+
