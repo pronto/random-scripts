@@ -1,8 +1,13 @@
-#!/usr/bin/env python
-import argparse, sys, re, subprocess, gzip
+#!/usr/bin/env python2.7
+import os, argparse, sys, re, subprocess, gzip
 
-#change this to whre you have your file, i'll look into making this be auto later
-path_to_mdb = "/home/pronto/git/random-scripts/arp/"
+#path_to_mdb = "/home/pronto/git/random-scripts/arp/"
+#path_to_mdb = sys.path[0]
+#print path_to_mdb
+
+#automaticly finds out the path of the script, where the mdb file should be as well
+if os.path.isfile(sys.path[0]+"/mdb") == False:
+	quit("you need the mdb file  (mac database)")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', action='store', dest='iface', default='AUTO', help='force the interface')
@@ -37,7 +42,7 @@ else:
 	network = results.network
 
 print 'network/cidr: ' + network
-conf.verb=0
+#conf.verb=0
 if results.iface == 'AUTO':
 	intface = netinfo[7]
 else:
@@ -52,7 +57,7 @@ for snd,rcv in ans:
     #print "test:" + Ether.src + "\n"
 	mac = rcv.sprintf(r"%Ether.src%")
 	ip = rcv.sprintf(r"%ARP.psrc%")
-	for line in open(path_to_mdb+"mdb"):
+	for line in open(sys.path[0]+"/mdb"):
 	#   using the gzip makes it SLOW AS BALLS, but also makes mdb file from 1008k to 292k... tempting, but omg slow 
 	#    for line in gzip.open(path_to_mdb+"mdb2.gz"):
 		if mac[:8].upper() in line:

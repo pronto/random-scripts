@@ -28,9 +28,8 @@ def calcCIDR(mask):
     for c in bits:
         if c == '1': cidr += 1
     return str(cidr)
-cidr = calcCIDR(netinfo[2]) 
 
-network = netinfo[0]+"/"+cidr
+network = netinfo[0]+"/"+calcCIDR(netinfo[2])
 print network + " using iface: " + netinfo[7]
 from scapy.all import srp,Ether,ARP,conf
 conf.verb=0
