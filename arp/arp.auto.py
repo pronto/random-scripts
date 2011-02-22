@@ -16,37 +16,19 @@ output2 = output1[2].split(' ')
 netinfo = filter(None, output2)
 #print netinfo 
 #['192.168.2.0', '*', '255.255.255.0', 'U', '0', '0', '0', 'eth0']
+# thanks to TorrentialStorm  we no longer have a massive elif table :D   *high five*
+def calcCIDR(mask):
+    mask = mask.split('.')
+    bits = []
+    for c in mask:
+       bits.append(bin(int(c)))
+    bits = ''.join(bits)
+    cidr = 0
+    for c in bits:
+        if c == '1': cidr += 1
+    return str(cidr)
+cidr = calcCIDR(netinfo[2]) 
 
-if netinfo[2] == "255.255.255.0":
-    cidr = "24"
-elif netinfo[2] == "255.255.255.128":
-    cidr = "25"
-elif netinfo[2] == "255.255.255.192":
-    cidr = "26"
-elif netinfo[2] == "255.255.255.224":
-    cidr = "27"
-elif netinfo[2] == "255.255.255.240":
-    cidr = "28"
-elif netinfo[2] == "255.255.255.248":
-    cidr = "29"
-elif netinfo[2] == "255.255.255.32":
-    cidr = "30"
-elif netinfo[2] == "255.255.254.0":
-	cidr = "23"
-elif netinfo[2] == "255.255.252.0":
-	cidr = "22"
-elif netinfo[2] == "255.255.248.0":
-	cidr = "21"
-elif netinfo[2] == "255.255.240.0":
-	cidr = "20"
-elif netinfo[2] == "255.255.224.0":
-	cidr = "19"
-elif netinfo[2] == "255.255.192.0":
-	cidr = "18"
-elif netinfo[2] == "255.255.128.0":
-	cidr = "17"
-elif netinfo[2] == "255.255.0.0":
-	cidr = "16"
 network = netinfo[0]+"/"+cidr
 print network
 from scapy.all import srp,Ether,ARP,conf
