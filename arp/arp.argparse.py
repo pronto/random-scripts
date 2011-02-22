@@ -8,7 +8,8 @@ import os, argparse, sys, re, subprocess, gzip
 #automaticly finds out the path of the script, where the mdb file should be as well
 if os.path.isfile(sys.path[0]+"/mdb") == False:
 	quit("you need the mdb file  (mac database)")
-
+if os.getuid() != 0:
+	quit("user, why you no root! please retry with root(scapy needs it)")
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', action='store', dest='iface', default='AUTO', help='force the interface')
 parser.add_argument('-n', action='store', dest='network', default='AUTO', help='force the network ex: 192.168.2.0/24')
