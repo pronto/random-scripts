@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import argparse, sys, re, subprocess, gzip
-from scapy.all import srp,Ether,ARP,conf
 
 #change this to whre you have your file, i'll look into making this be auto later
 path_to_mdb = "/home/pronto/git/random-scripts/arp/"
@@ -46,6 +45,7 @@ else:
 
 print 'intface: ' + intface
 
+from scapy.all import srp,Ether,ARP,conf
 ans,unans=srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=network), timeout=2, iface=intface)
 
 for snd,rcv in ans:
