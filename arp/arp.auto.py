@@ -15,6 +15,7 @@ output1 = p.stdout.read().split('\n')
 output2 = output1[2].split(' ')
 netinfo = filter(None, output2)
 #print netinfo 
+#		0		  1			2			3	 4	  5	   6	  7
 #['192.168.2.0', '*', '255.255.255.0', 'U', '0', '0', '0', 'eth0']
 # thanks to TorrentialStorm  we no longer have a massive elif table :D   *high five*
 def calcCIDR(mask):
@@ -30,11 +31,10 @@ def calcCIDR(mask):
 cidr = calcCIDR(netinfo[2]) 
 
 network = netinfo[0]+"/"+cidr
-print network
+print network + " using iface: " + netinfo[7]
 from scapy.all import srp,Ether,ARP,conf
 conf.verb=0
-ans,unans=srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=network),
-              timeout=2)
+ans,unans=srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=network), timeout=2, iface=netinfo[7])
 
 for snd,rcv in ans:
 	#print "test:" + Ether.src + "\n"
