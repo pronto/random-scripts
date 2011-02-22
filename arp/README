@@ -15,3 +15,17 @@ WARNING: No route found for IPv6 destination :: (no default route?)
 192.168.2.109    1c:4b:d6:xx:xx:xx              Azurewav               # AzureWave
 192.168.2.115    ec:9b:5b:xx:xx:xx              Nokia                  # Nokia Corporation
 
+
+
+
+art.argparse.py now allows for switches :D
+
+usage: arp.argparse.py [-h] [-i IFACE] [-n NETWORK]
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -i IFACE    force the interface
+  -n NETWORK  force the network ex: 192.168.2.0/24
+
+so like:      python2.7 arp.argparse.py -i eth0 -n 10.2.4.0/22 
+	will force it to be that interface on that network 
