@@ -1,11 +1,14 @@
 #! /usr/bin/env python
 # arping2tex : arpings a network and outputs a LaTeX table as a result
 
-import sys, re, subprocess
+import sys, re, subprocess, gzip
 #if len(sys.argv) != 2:
 #    print "Usage: arping2tex <net>\n  eg: arping2tex 192.168.1.0/24"
 #    sys.exit(1)
+
+#put the path to where you have the mdb file (massive file of mac->companies)
 path_to_mdb = "/home/pronto/git/random-scripts/arp/"
+
 num_box = 0
 p = subprocess.Popen(["route"], stdout=subprocess.PIPE)
 output1 = p.stdout.read().split('\n')
@@ -55,7 +58,9 @@ for snd,rcv in ans:
 	#print "test:" + Ether.src + "\n"
 	mac = rcv.sprintf(r"%Ether.src%")
 	ip = rcv.sprintf(r"%ARP.psrc%")
-	for line in open(path_to_mdb+"mdb"):
+#	for line in open(path_to_mdb+"mdb"):
+#	using the gzip makes it SLOW AS BALLS, but also makes mdb file from 1008k to 292k... tempting, but omg slow 
+	for line in gzip.open(path_to_mdb+"mdb2.gz"):
 		if mac[:8].upper() in line:
 			info1 = re.sub("\n", "", line)
 			info = re.sub(mac[:8].upper(), "" ,info1)
