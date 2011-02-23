@@ -1,25 +1,3 @@
-Needs scapy, tcpdump .. amoung other things 
-these scripts also work on the nokia n900 (need to install tcpdump and scapy on the n900 though)
-yeah..
-
-The auto one gets the network you're on from route
-
-the non-auto arp.py needs your network like 192.168.2.0/24
-
-output example:
-[root@amd arp]# python2.7 arp.auto.py 
-192.168.2.0/24
-WARNING: No route found for IPv6 destination :: (no default route?)
-192.168.2.1      00:0c:41:xx:xx:xx              Cisco-Li               # Cisco-Linksys
-192.168.2.179    00:17:31:xx:xx:xx              AsustekC               # ASUSTek COMPUTER INC.
-192.168.2.109    1c:4b:d6:xx:xx:xx              Azurewav               # AzureWave
-192.168.2.115    ec:9b:5b:xx:xx:xx              Nokia                  # Nokia Corporation
-
-
-
-
-art.argparse.py now allows for switches :D
-
 usage: arp.argparse.py [-h] [-i IFACE] [-n NETWORK]
 
 optional arguments:
@@ -27,5 +5,39 @@ optional arguments:
   -i IFACE    force the interface
   -n NETWORK  force the network ex: 192.168.2.0/24
 
-so like:      python2.7 arp.argparse.py -i eth0 -n 10.2.4.0/22 
-	will force it to be that interface on that network 
+
+
+Needs scapy, tcpdump .. amoung other things 
+these scripts also work on the nokia n900 (need to install tcpdump and scapy on the n900 though)
+dont bother with arp.py or arp.auto.py    , arp.argparse.py allows for both auto, and manuel modes
+
+	pronto@amd ~/git/random-scripts/arp $ sudo ./arp.argparse.py 
+	AUTO
+	AUTO
+	network/cidr: 192.168.2.0/24
+	intface: eth0
+	Begin emission:
+	**Finished to send 256 packets.
+	.**......................
+	Received 27 packets, got 4 answers, remaining 252 packets
+	192.168.2.1      00:0c:41:d0:be:a1              Cisco-Li
+	192.168.2.179    00:17:31:9b:ca:ef              AsustekC
+	192.168.2.109    1c:4b:d6:86:2a:cf              Azurewav
+	192.168.2.115    ec:9b:5b:d3:93:cc              Nokia
+	total boxes: 4
+
+i could of done the same thing with:  ./arp.argparse.py -i eth0 -n 192.168.2.0/24
+use the switches when what you want to scan is differnt from the first entry in route
+	$ route
+	Kernel IP routing table
+	Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+	192.168.2.0     *               255.255.255.0   U     0      0        0 eth0
+	default         192.168.2.1     0.0.0.0         UG    0      0        0 eth0
+
+
+
+
+
+
+
+
