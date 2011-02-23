@@ -1,5 +1,5 @@
 #!/usr/bin/env python2.7
-import os, argparse, sys, re, subprocess, gzip
+import logging, os, argparse, sys, re, subprocess, gzip
 
 #path_to_mdb = "/home/pronto/git/random-scripts/arp/"
 #path_to_mdb = sys.path[0]
@@ -51,6 +51,8 @@ else:
 
 print 'intface: ' + intface
 
+#apently surrpise the ipv6 warning.. http://tech.xster.net/tips/suppress-scapy-ipv6-warning/.
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import srp,Ether,ARP,conf
 ans,unans=srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=network), timeout=2, iface=intface)
 
