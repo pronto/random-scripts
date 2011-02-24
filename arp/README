@@ -7,7 +7,7 @@ optional arguments:
 
 
 
-Needs scapy, tcpdump .. amoung other things 
+Needs Python2.7(argparse is not on 2.5) scapy, tcpdump .. amoung other things 
 these scripts also work on the nokia n900 (need to install tcpdump and scapy on the n900 though)
 dont bother with arp.py or arp.auto.py    , arp.argparse.py allows for both auto, and manuel modes
 

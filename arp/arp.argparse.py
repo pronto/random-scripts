@@ -13,6 +13,9 @@ if os.getuid() != 0:
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', action='store', dest='iface', default='AUTO', help='force the interface')
 parser.add_argument('-n', action='store', dest='network', default='AUTO', help='force the network ex: 192.168.2.0/24')
+parser.add_argument('-w', action='store', dest='writefile', default='AUTO', help='(not implenmeted yet)write the list of IP/macs to a file')
+
+
 results = parser.parse_args()
 print results.iface
 print results.network
@@ -37,8 +40,7 @@ def calcCIDR(mask):
         if c == '1': cidr += 1
     return str(cidr)
 if results.network == 'AUTO':
-	cidr = calcCIDR(netinfo[2])
-	network = netinfo[0]+"/"+cidr
+	network = netinfo[0]+"/"+calcCIDR(netinfo[2])
 else:
 	network = results.network
 
@@ -71,9 +73,10 @@ for snd,rcv in ans:
     #       info = "NOT FOUND IN DATABSE"
 	num_box += 1
 	print ip + " \t " + mac + " \t " + info.split(" ")[0]
+#	if writefile != 'AUTO':
+#		file = open(writefile, w)
+			#yeah..
     #print mac[:8]  #woo, THIS FUCKING WORKS , BITCH >:O
     #print rcv.sprintf(r"%Ether.src% & %ARP.psrc%\\")
 print "total boxes: " + str(num_box)
-
-
 
