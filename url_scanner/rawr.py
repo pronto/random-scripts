@@ -1,5 +1,7 @@
 #!/usr/bin/env python2.7
 import os, sys, pexpect, urllib2
+
+#needs a file called dirs.t  that lists one folder per new line
 if os.path.isfile("./dirs.t") == False:
 	quit("no dirs file")
 file_dir = open('./dirs.t','r')
