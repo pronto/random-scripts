@@ -1,0 +1,13 @@
+dir_one
+heh
+bagels
+dir_test
+phpmyadmin
+myadmin
+rawr
+linux
+admin
+etc
+cgi-win
+cgi-lose
+cgi-bin
