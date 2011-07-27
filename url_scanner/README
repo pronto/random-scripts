@@ -1,1 +1,14 @@
 class project thing
+it ignores http code of 404
+Output example:
+
+$ ./rawr.py
+401     http://pronto185.com/heh
+200     http://pronto185.com/linux
+                First 60 char:  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><htm
+403     http://pronto185.com/cgi-bin
+
+
+
+
+
