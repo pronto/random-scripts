@@ -19,7 +19,7 @@ for line in file_dir.readlines():
 	code = GetHttpCode(url,line)
 	
 	if code[0] != 404:
-		print '%s	%s%s' % (str(code[0]),str(url),str(line.replace('\n','')))
+		print '%s\t%s%s' % (str(code[0]),str(url),str(line.replace('\n','')))
 		if code[0] == 200:
 			print "\t\tFirst 60 char:\t" + code[1].replace("\n","")
 
