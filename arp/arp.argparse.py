@@ -29,6 +29,9 @@ num_box = 0
 #netinfo = filter(None, output2)
 #better way of doing this... import subprocess
 
+
+
+#	http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib/5111878#5111878
 co = subprocess.Popen(['ifconfig'], stdout = subprocess.PIPE)
 ifconfig = co.stdout.read()
 ip_regex = re.compile('((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-4]|2[0-5][0-9]|[01]?[0-9][0-9]?))')
