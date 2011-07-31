@@ -23,10 +23,23 @@ print results.iface
 print results.network
 
 num_box = 0
-p = subprocess.Popen(["route"], stdout=subprocess.PIPE)
-output1 = p.stdout.read().split('\n')
-output2 = output1[2].split(' ')
-netinfo = filter(None, output2)
+
+
+#p = subprocess.Popen(["route"], stdout=subprocess.PIPE)
+#output1 = p.stdout.read().split('\n')
+#output2 = output1[2].split(' ')
+#netinfo = filter(None, output2)
+#better way of doing this... import subprocess
+
+co = subprocess.Popen(['ifconfig'], stdout = subprocess.PIPE)
+ifconfig = co.stdout.read()
+ip_regex = re.compile('((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-4]|2[0-5][0-9]|[01]?[0-9][0-9]?))')
+netinfo = [match[0] for match in ip_regex.findall(ifconfig, re.MULTILINE)]
+
+#['192.168.2.179', '192.168.2.255', '255.255.255.0', '127.0.0.1', '255.0.0.0']
+#		0				1				3				4			5
+
+
 #print netinfo 
 #       0         1         2           3    4    5    6      7
 #['192.168.2.0', '*', '255.255.255.0', 'U', '0', '0', '0', 'eth0']
@@ -42,6 +55,9 @@ def calcCIDR(mask):
         if c == '1': cidr += 1
     return str(cidr)
 if results.network == 'AUTO':
+	#old netinfo
+	#network = netinfo[0]+"/"+calcCIDR(netinfo[2])
+	#new netinfo
 	network = netinfo[0]+"/"+calcCIDR(netinfo[2])
 else:
 	network = results.network
