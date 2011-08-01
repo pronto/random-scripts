@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 import logging, os, argparse, sys, re, subprocess, gzip
-
+import commands
 #path_to_mdb = "/home/pronto/git/random-scripts/arp/"
 #path_to_mdb = sys.path[0]
 #print path_to_mdb
@@ -34,14 +34,16 @@ num_box = 0
 
 
 #	http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib/5111878#5111878
-co = subprocess.Popen(['ifconfig'], stdout = subprocess.PIPE)
-ifconfig = co.stdout.read()
-ip_regex = re.compile('((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-4]|2[0-5][0-9]|[01]?[0-9][0-9]?))')
-netinfo = [match[0] for match in ip_regex.findall(ifconfig, re.MULTILINE)]
+if results.network == 'AUTO' or results.iface = 'AUTO':
+	route_gw = commands.getoutput("route|grep default|awk '{print $NF'}")
+	co = subprocess.Popen(['ifconfig',route_gw], stdout = subprocess.PIPE)
+	ifconfig = co.stdout.read()
+	ip_regex = re.compile('((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-4]|2[0-5][0-9]|[01]?[0-9][0-9]?))')
+	netinfo = [match[0] for match in ip_regex.findall(ifconfig, re.MULTILINE)]
 
-#['192.168.2.179', '192.168.2.255', '255.255.255.0', '127.0.0.1', '255.0.0.0']
-#		0				1				3				4			5
-
+#['10.0.0.159', '10.0.0.255', '255.255.255.0']
+#	0				1				2
+#	ip				broadcast		mask
 
 #print netinfo 
 #       0         1         2           3    4    5    6      7
